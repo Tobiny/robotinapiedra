@@ -33,12 +33,16 @@ class GUIPiedras:
         self.playerScore = Label(self.root, text=0, font=100, bg="#1A237E", fg="white")
         self.computerScore = Label(self.root, text=0, font=100, bg="#1A237E", fg="white")
         self.computerScore.grid(row=1, column=3)
+        self.tieScore = Label(self.root, text=0, font=100, bg="#1A237E", fg="white")
+        self.tieScore.grid(row=1, column=2)
         self.playerScore.grid(row=1, column=1)
 
         # Indicadores
         self.user_indicator = Label(self.root, font=100, text="USUARIO", bg="#1A237E", fg="white")
         self.pc_indicator = Label(self.root, font=100, text="COMPUTADORA", bg="#1A237E", fg="white")
+        self.tie_indicator = Label(self.root, font=100, text="EMPATE", bg="#1A237E", fg="white")
         self.user_indicator.grid(row=0, column=1)
+        self.tie_indicator.grid(row=0, column=2)
         self.pc_indicator.grid(row=0, column=3)
 
         # Mensajes
@@ -101,7 +105,11 @@ class GUIPiedras:
         score += 1
         self.computerScore["text"] = str(score)
 
-        # Actualiza las respuestas
+    def updateTieScore(self):
+        score = int(self.tieScore["text"])
+        score += 1
+        self.tieScore["text"] = str(score)
+    # Actualiza las respuestas
 
     def updateChoice(self, x):
         self.yo.tirada = x
@@ -134,6 +142,7 @@ class GUIPiedras:
             self.robotina.victorias += 1
         elif self.yo.tirada == self.robotina.tirada:
             self.updateMessage("Empataron")
+            self.updateTieScore()
             self.empates += 1
         else:
             self.updateMessage("Ganó usted")
